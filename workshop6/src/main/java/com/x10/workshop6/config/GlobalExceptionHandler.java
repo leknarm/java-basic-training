@@ -30,5 +30,11 @@ public class GlobalExceptionHandler {
         ApiResponse<String> response = new ApiResponse<>("4002", errorMessage, null);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
-    
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse<String>> handleAllExceptions(Exception ex) {
+        ApiResponse<String> response = new ApiResponse<>("5000", ex.getMessage(), null);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
