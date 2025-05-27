@@ -20,12 +20,12 @@ public class App {
         List<Integer> beam3 = List.of(10, 20, 30);
         List<Integer> beam4 = List.of(1, 10, 20);
         Integer result2 = solve(beam3, beam4);
-        System.out.println("Result1: " + result2);
+        System.out.println("Result2: " + result2);
 
         List<Integer> beam5 = List.of(10, 20);
         List<Integer> beam6 = List.of(5, 10, 15, 20);
         Integer result3 = solve(beam5, beam6);
-        System.out.println("Result1: " + result3);
+        System.out.println("Result3: " + result3);
         long end = System.nanoTime();
         System.out.println("Processing time: " + (end - start) / 1_000_000.0 + " ms");
     }
