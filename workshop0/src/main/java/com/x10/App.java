@@ -11,6 +11,7 @@ import java.util.Set;
  */
 public class App {
     public static void main(String[] args) {
+        long start = System.nanoTime();
         List<Integer> beam1 = List.of(2, 7, 8, 15, 20);
         List<Integer> beam2 = List.of(3, 4, 5, 7, 10, 16, 21);
         Integer result1 = solve(beam1, beam2);
@@ -25,7 +26,8 @@ public class App {
         List<Integer> beam6 = List.of(5, 10, 15, 20);
         Integer result3 = solve(beam5, beam6);
         System.out.println("Result1: " + result3);
-        
+        long end = System.nanoTime();
+        System.out.println("Processing time: " + (end - start) / 1_000_000.0 + " ms");
     }
 
     public static Integer solve(List<Integer> beam1, List<Integer> beam2) {
