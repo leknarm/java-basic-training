@@ -26,6 +26,12 @@ public class App {
         List<Integer> beam6 = List.of(5, 10, 15, 20);
         Integer result3 = solve(beam5, beam6);
         System.out.println("Result3: " + result3);
+
+        List<Integer> beam7 = List.of(10, 20, 30, 40);
+        List<Integer> beam8 = List.of(5, 10, 15, 20, 25, 30, 35, 40);
+        Integer result4 = solve(beam7, beam8);
+        System.out.println("Result4: " + result4);
+
         long end = System.nanoTime();
         System.out.println("Processing time: " + (end - start) / 1_000_000.0 + " ms");
     }
@@ -51,17 +57,18 @@ public class App {
         evenCommon.retainAll(evenBeam2.subList(0, Math.max(evenBeam2.size() - 1, 0)));
         
         // Find min and max of shortest beam
-        int minPosOfShortestBeam = (beam1.size() < beam2.size() ? Collections.min(beam1) : Collections.min(beam2));
-        int maxPosOfShortestBeam = (beam1.size() < beam2.size() ? Collections.max(beam1) : Collections.max(beam2));
+        // int minPosOfShortestBeam = (beam1.size() < beam2.size() ? Collections.min(beam1) : Collections.min(beam2));
+        // int maxPosOfShortestBeam = (beam1.size() < beam2.size() ? Collections.max(beam1) : Collections.max(beam2));
+        int minPos = Collections.min(beam1) < Collections.min(beam2) ? Collections.min(beam1) : Collections.min(beam2);
+        int maxPos = Collections.max(beam1) > Collections.max(beam2) ? Collections.max(beam1) : Collections.max(beam2);
         
         // Find number of elements between min and max (inclusive) in the longer list
         int crossElementsWithStart = 1; // Count the starting element
         if (beam1.size() < beam2.size()) {
-            crossElementsWithStart += beam2.stream().filter(x -> x >= minPosOfShortestBeam && x <= maxPosOfShortestBeam).count();
+            crossElementsWithStart += beam2.stream().filter(x -> x >= minPos && x < maxPos).count();
         } else {
-            crossElementsWithStart += beam1.stream().filter(x -> x >= minPosOfShortestBeam && x <= maxPosOfShortestBeam).count();
+            crossElementsWithStart += beam1.stream().filter(x -> x >= minPos && x < maxPos).count();
         }
-        System.out.println("crossElementsWithStart: " + crossElementsWithStart);
         
         int skip = 0;
         skip += findSkip(beam1, beam2, oddCommon);
